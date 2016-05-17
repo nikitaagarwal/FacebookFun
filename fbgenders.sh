@@ -6,11 +6,6 @@ url="https://graph.facebook.com/me/friends?fields=name,gender&access_token="$acc
 sample=`curl $url`
 
 
-if [ $(echo $sample | wc -c) -lt 500 ]
-then 
-echo "Invalid"
-exit
-fi
 
 totalcount=`echo $sample | grep -Eo "\"gender\":\"[^\"]{1,}\"" | sed s/\"gender\":\"//g | tr -d '\"' | wc -l`
 femalecount=`echo $sample | grep -Eo "\"gender\":\"[^\"]{1,}\"" | sed s/\"gender\":\"//g | tr -d '\"' | grep "female" | wc -l`
